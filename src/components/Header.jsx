@@ -8,7 +8,7 @@ const Header = ({ showQuestionHandler }) => {
 
   return (
     userLoggedIn && (
-      <nav className="flex justify-end items-center gap-x-8 w-full z-20 fixed top-0 left-0 h-12 px-10">
+      <nav className="flex justify-end items-center gap-x-8 w-full z-20 fixed top-0  h-12 px-10">
         <button
           onClick={() => {
             doSignOut().then(() => {

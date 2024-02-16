@@ -15,9 +15,11 @@ const Home = () => {
   const { currentUser } = useAuth();
   const { questionData } = useQuiz();
 
-  const [showQuestions, setShowQuestions] = useState(true);
+  const [showQuestions, setShowQuestions] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [completedStatusArray, setCompletedStatusArray] = useState(Array(questionData.length).fill(false)); 
+  const [completedStatusArray, setCompletedStatusArray] = useState(
+    Array(questionData.length).fill(false)
+  );
 
   const showQuestionHandler = () => {
     setShowQuestions(() => !showQuestions);
@@ -36,11 +38,15 @@ const Home = () => {
               const completedQuestionsData = docSnap.data();
               const newCompletedStatusArray = questionData.map((question) => {
                 const questionId = question.id;
-                return completedQuestionsData.hasOwnProperty(questionId) ? completedQuestionsData[questionId] : false;
+                return completedQuestionsData.hasOwnProperty(questionId)
+                  ? completedQuestionsData[questionId]
+                  : false;
               });
               setCompletedStatusArray(newCompletedStatusArray);
             } else {
-              const initialCompletedStatusArray = Array(questionData.length).fill(false);
+              const initialCompletedStatusArray = Array(
+                questionData.length
+              ).fill(false);
               setCompletedStatusArray(initialCompletedStatusArray);
             }
           });
@@ -55,7 +61,6 @@ const Home = () => {
     fetchQuestionCompletionStatus();
   }, [currentUser, questionData]);
 
- 
   const handleNextQuestion = () => {
     setQuestionNumber((prevQuestionNumber) => Number(prevQuestionNumber) + 1);
   };
@@ -66,39 +71,55 @@ const Home = () => {
     }
   };
 
-  
   return questionData.length === 0 ? (
     <>Loading...</>
   ) : (
     <motion.div
       layout
       className="text-2xl font-bold  h-screen w-full flex justify-center items-center font-display"
-      style={{
-        background: "#c94b4b",
-        background: "-webkit-linear-gradient(to left, #c94b4b, #4b134f)",
-        background: "linear-gradient(to left, #c94b4b, #4b134f)",
-      }}
     >
-       
       <Header showQuestionHandler={showQuestionHandler} />
-       {showQuestions && (
+      {showQuestions && (
         <motion.div
-        layout 
+          layout
           className="overflow-x-hidden h-screen w-full 2xl:w-1/4 xl:w-2/4 lg:w-3/4 bg-slate-900 absolute top-0 right-0 transition-all duration-150 pt-24 px-5 z-10 shadow-2xl"
-        
         >
-          <Menu questionNumber={questionNumber} setQuestionNumber={setQuestionNumber} />
+          <Menu
+            questionNumber={questionNumber}
+            setQuestionNumber={setQuestionNumber}
+          />
         </motion.div>
       )}
 
-      <motion.div className="flex w-full justify-center"> 
-      <button className="text-slate-200" onClick={handlePreviousQuestion} disabled={Number(questionNumber) === 1}><FaAngleLeft /></button>
+      <motion.div layout className="flex w-full justify-center max-h-1/2">
+        <button
+          className={`text-slate-200 ${
+            Number(questionNumber) === 1 && "opacity-0"
+          }`}
+          onClick={handlePreviousQuestion}
+          disabled={Number(questionNumber) === 1}
+        >
+          <FaAngleLeft />
+        </button>
 
-      <div className="m-5 w-full h-3/4 lg:w-1/2 overflow-auto">
-        <Questions questionNumber={questionNumber} questionData={questionData[questionNumber - 1]} completedStatusArray={completedStatusArray} setCompletedStatusArray={setCompletedStatusArray}/>
-      </div>
-      
-      <button className="text-slate-200" onClick={handleNextQuestion} disabled={Number(questionNumber) === 155}><FaAngleRight /></button>
+        <div className="h-auto lg:w-1/2 overflow-auto">
+          <Questions
+            questionNumber={questionNumber}
+            questionData={questionData[questionNumber - 1]}
+            completedStatusArray={completedStatusArray}
+            setCompletedStatusArray={setCompletedStatusArray}
+          />
+        </div>
+
+        <button
+          className={`text-slate-200 ${
+            Number(questionNumber) === 155 && "opacity-0"
+          }`}
+          onClick={handleNextQuestion}
+          disabled={Number(questionNumber) === 155}
+        >
+          <FaAngleRight />
+        </button>
       </motion.div>
     </motion.div>
   );

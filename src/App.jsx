@@ -31,7 +31,11 @@ function App() {
   return (
     <AuthProvider>
       
-      <div className="w-full h-screen flex flex-col">{routesElement}</div>
+      <div className=" flex justify-center pt-32 h-full md:pt-0" style={{
+        background: "#c94b4b",
+        background: "-webkit-linear-gradient(to left, #c94b4b, #4b134f)",
+        background: "linear-gradient(to left, #c94b4b, #4b134f)",
+      }}>{routesElement}</div>
     </AuthProvider>
   );
 }

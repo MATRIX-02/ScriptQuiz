@@ -136,7 +136,7 @@ const Questions = ({ questionNumber, questionData, completedStatusArray, setComp
       <motion.div
         layout
         transition={{ layout: { type: "spring" } }}
-        className="h-max w-full bg-slate-800 rounded-lg p-5"
+        className=" bg-slate-800 rounded-lg p-5"
       >
         <motion.div className="flex justify-between">
           <motion.span layout="position" className="text-slate-200">
