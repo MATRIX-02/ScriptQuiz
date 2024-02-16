@@ -6,7 +6,7 @@ import Home from "./components/home";
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
 
-import './App.css'
+import "./App.css";
 
 function App() {
   const routesArray = [
@@ -30,12 +30,9 @@ function App() {
   let routesElement = useRoutes(routesArray);
   return (
     <AuthProvider>
-      
-      <div className=" flex justify-center pt-32 h-full md:pt-0" style={{
-        background: "#c94b4b",
-        background: "-webkit-linear-gradient(to left, #c94b4b, #4b134f)",
-        background: "linear-gradient(to left, #c94b4b, #4b134f)",
-      }}>{routesElement}</div>
+      <div className="flex justify-center h-screen w-full overflow-auto">
+        {routesElement}
+      </div>
     </AuthProvider>
   );
 }

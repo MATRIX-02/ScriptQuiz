@@ -76,7 +76,7 @@ const Home = () => {
   ) : (
     <motion.div
       layout
-      className="text-2xl font-bold  h-screen w-full flex justify-center items-center font-display"
+      className="text-2xl font-bold font-display h-full w-full flex place-content-center place-items-center"
     >
       <Header showQuestionHandler={showQuestionHandler} />
       {showQuestions && (
@@ -91,9 +91,9 @@ const Home = () => {
         </motion.div>
       )}
 
-      <motion.div layout className="flex w-full justify-center max-h-1/2">
+      <motion.div layout className="flex place-items-center place-content-center w-full justify-center h-full">
         <button
-          className={`text-slate-200 ${
+          className={`text-slate-200 p-1 lg:p-4 ${
             Number(questionNumber) === 1 && "opacity-0"
           }`}
           onClick={handlePreviousQuestion}
@@ -102,7 +102,7 @@ const Home = () => {
           <FaAngleLeft />
         </button>
 
-        <div className="h-auto lg:w-1/2 overflow-auto">
+        <div className="h-4/5 lg:h-2/3 lg:w-1/2 overflow-auto scrollbar rounded-lg">
           <Questions
             questionNumber={questionNumber}
             questionData={questionData[questionNumber - 1]}
@@ -112,7 +112,7 @@ const Home = () => {
         </div>
 
         <button
-          className={`text-slate-200 ${
+          className={`text-slate-200 p-1 lg:p-4 ${
             Number(questionNumber) === 155 && "opacity-0"
           }`}
           onClick={handleNextQuestion}

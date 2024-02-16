@@ -152,7 +152,7 @@ const Questions = ({ questionNumber, questionData, completedStatusArray, setComp
           </motion.button>
         </motion.div>
         {body && (
-          <motion.span className="block mt-5 text-slate-400 text-sm font-extralight bg-slate-700 p-4 rounded">
+          <motion.span className="block mt-5 text-slate-400 text-sm font-extralight bg-slate-700 p-4 rounded overflow-auto">
             <Markdown>{body}</Markdown>
           </motion.span>
         )}

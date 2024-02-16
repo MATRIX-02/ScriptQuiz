@@ -53,8 +53,8 @@ const Login = () => {
     <div>
       {userLoggedIn && <Navigate to={"/home"} replace={true} />}  
 
-      <main className="w-full h-screen flex self-center place-content-center place-items-center" style={{  background: "#c94b4b", background: "-webkit-linear-gradient(to left, #c94b4b, #4b134f)", background: "linear-gradient(to left, #c94b4b, #4b134f)" }}>
-        <div className="w-96 text-slate-300 bg-slate space-y-5 p-4 shadow-xl border rounded-xl">
+      <main className="w-full h-screen flex place-content-center place-items-center">
+        <div className="w-full text-slate-300 bg-slate space-y-5 p-4 shadow-xl border rounded-xl">
           <div className="text-center">
             <div className="mt-2">
               <h3 className="text-slate-200 text-xl font-semibold sm:text-2xl">

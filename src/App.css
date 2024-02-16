@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    scroll-behavior: smooth;
+    background: #c94b4b;
+    background: -webkit-linear-gradient(to left, #c94b4b, #4b134f);
+    background: linear-gradient(to left, #c94b4b, #4b134f);
+}
+
+.scrollbar::-webkit-scrollbar{
+    width: .4rem;
+    
+}
+
+.scrollbar::-webkit-scrollbar-track{
+    margin: 5rem 0;
+    background: #242424;
+}
+
+.scrollbar::-webkit-scrollbar-thumb{
+    background: rgb(221, 221, 221);
+}
