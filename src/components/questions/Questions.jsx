@@ -1,3 +1,5 @@
+
+import rehypeRaw from "rehype-raw";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
@@ -6,8 +8,15 @@ import { markQuestionCompleted } from "../store/store";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase/firebase";
 
-const Questions = ({ questionNumber, questionData, completedStatusArray, setCompletedStatusArray }) => {
-  const { title, body, answers, correctAnswer, explanation } = questionData
+
+
+const Questions = ({
+  questionNumber,
+  questionData,
+  completedStatusArray,
+  setCompletedStatusArray,
+}) => {
+  const { title, body, answers, correctAnswer, explanation } = questionData;
   const [showDesc, setShowDesc] = useState(false);
   const isCompleted = completedStatusArray[questionNumber - 1];
   const currentUser = auth.currentUser;
@@ -23,7 +32,11 @@ const Questions = ({ questionNumber, questionData, completedStatusArray, setComp
           const completedQuestionsData = docSnap.data();
           if (completedQuestionsData.hasOwnProperty(questionNumber)) {
             const isCompleted = completedQuestionsData[questionNumber];
-            await setDoc(docRef, { [questionNumber]: !isCompleted }, { merge: true });
+            await setDoc(
+              docRef,
+              { [questionNumber]: !isCompleted },
+              { merge: true }
+            );
             setCompletedStatusArray((prevArray) => {
               const newArray = [...prevArray];
               newArray[questionNumber - 1] = !isCompleted;
@@ -90,7 +103,11 @@ const Questions = ({ questionNumber, questionData, completedStatusArray, setComp
         const completedQuestionsData = docSnap.data();
         if (completedQuestionsData.hasOwnProperty(questionNumber)) {
           const isCompleted = completedQuestionsData[questionNumber];
-          await setDoc(docRef, { [questionNumber]: !isCompleted }, { merge: true });
+          await setDoc(
+            docRef,
+            { [questionNumber]: !isCompleted },
+            { merge: true }
+          );
           setCompletedStatusArray((prevArray) => {
             const newArray = [...prevArray];
             newArray[questionNumber - 1] = !isCompleted;
@@ -131,6 +148,25 @@ const Questions = ({ questionNumber, questionData, completedStatusArray, setComp
     }
   };
 
+  const components = {
+    code: ({ inline, className, children }) => {
+      if (className === 'language-js') {
+        return (
+          
+          <code className="block mt-5 text-slate-400 text-sm font-extralight bg-slate-700 p-4 rounded overflow-auto">
+            {children}
+          </code>
+        );
+      }
+
+      return (
+        <code className={className}>
+          {children}
+        </code>
+      );
+    }
+  };
+
   return (
     questionData && (
       <motion.div
@@ -144,8 +180,9 @@ const Questions = ({ questionNumber, questionData, completedStatusArray, setComp
           </motion.span>
           <motion.button
             layout
-            className={`text-xs px-2 py-1 rounded  text-white ${isCompleted ? "bg-red-500" : "bg-green-500"
-              } `}
+            className={`text-xs px-2 py-1 rounded  text-white ${
+              isCompleted ? "bg-red-500" : "bg-green-500"
+            } `}
             onClick={markQuestionIncomplete}
           >
             {buttonText}
@@ -190,7 +227,8 @@ const Questions = ({ questionNumber, questionData, completedStatusArray, setComp
             animate={{ opacity: 1 }}
             className="text-base font-normal text-slate-200 text-justify"
           >
-            {explanation}
+            <Markdown rehypePlugins={[rehypeRaw]} components={components}>{explanation}</Markdown>
+        {console.log(explanation)}
           </motion.div>
         )}
       </motion.div>

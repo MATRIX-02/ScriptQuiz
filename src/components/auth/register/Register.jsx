@@ -24,7 +24,7 @@ const Register = () => {
 
   return (
     <>
-      {userLoggedIn && <Navigate to={"/home"} replace={true} />}
+      {userLoggedIn && <Navigate to={"/login"} replace={true} />}
 
       <main className="w-full h-screen flex self-center place-content-center place-items-center" style={{  background: "#c94b4b", background: "-webkit-linear-gradient(to left, #c94b4b, #4b134f)", background: "linear-gradient(to left, #c94b4b, #4b134f)" }}>
         <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
@@ -100,7 +100,7 @@ const Register = () => {
               {isRegistering ? "Signing Up..." : "Sign Up"}
             </button>
             <div className="text-sm text-center text-slate-200">
-              Already have an account? {"   "}
+              Already have an account? 
               <Link
                 to={"/login"}
                 className="text-center text-sm hover:underline font-bold"
