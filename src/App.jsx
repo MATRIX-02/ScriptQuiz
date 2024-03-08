@@ -1,16 +1,14 @@
-import './App.css'
+import "./App.css";
 
 //Components
-import Default from './components/Authentication/Default'
+import Default from "./components/Authentication/Default";
 
 function App() {
-
-
   return (
     <>
-     <Default />
+      <Default />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

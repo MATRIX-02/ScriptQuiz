@@ -13,8 +13,8 @@ export const Signup = () => {
     e.preventDefault();
   };
   return (
-    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 font-mont">
-      <h2 className="font-bold font-montalt text-center text-2xl text-neutral-800 dark:text-neutral-200">
+    <div className="max-w-md w-full mx-auto p-4 font-mont lg:static absolute top-20 -z-10">
+      <h2 className="font-bold font-montalt text-center text-2xl text-neutral-200">
         Login
       </h2>
       <p className="text-neutral-300 text-sm max-w-sm mt-2 text-center">
