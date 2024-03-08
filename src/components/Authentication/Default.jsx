@@ -56,12 +56,11 @@ const Default = () => {
                 {showAnimation ? (
                   <>
                     {" "}
-                    <FaCirclePause className="mx-2" /> Stop Animation{" "}
+                    <FaCirclePause className="mx-2 scale-[2]" />
                   </>
                 ) : (
                   <>
-                    <IoIosPlayCircle className="mx-2 scale-125" /> Start
-                    Animation{" "}
+                    <IoIosPlayCircle className="mx-2 scale-[2.4]" />
                   </>
                 )}
               </button>
