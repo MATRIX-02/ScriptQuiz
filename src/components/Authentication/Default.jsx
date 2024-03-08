@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 //Components
 import { BackgroundBeams } from "../ui/BackgroundBeams";
@@ -24,7 +25,9 @@ const Default = () => {
   return (
     <>
       <div className="flex">
-        <div className="hidden w-2/4 h-screen p-14 lg:flex flex-col justify-between bg-gradient-to-tr from-[#160040] from-10% via-[#4C0070] via-30% via-[#79018C] via-60% to-[#9A0680] to-90%">
+        <motion.div
+          className={`hidden w-2/4 h-screen p-14 lg:flex flex-col justify-between transition-all bg-gradient-to-tr from-[#160040] from-10% via-[#4C0070] via-30% via-[#79018C] via-60% to-[#9A0680] to-90%`}
+        >
           <div className="z-10">
             <h1 className="text-white font-extrabold text-[4rem] font-mont">
               ScriptQuiz
@@ -36,7 +39,7 @@ const Default = () => {
           <span className="text-white font-madurai">
             Created with ❤️ by Mayank.
           </span>
-        </div>
+        </motion.div>
         <div className="lg:w-2/4  w-full h-screen p-14 relative z-10 flex flex-col justify-center items-center">
           <nav className="w-full px-5 items-center fixed top-0 left-0 right-0 m-auto flex justify-between lg:hidden py-3 backdrop-blur-sm shadow-md">
             <h1 className="text-white font-extrabold text-[1.5rem] font-mont">

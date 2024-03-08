@@ -1,18 +1,56 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
+
+// Components
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { cn } from "../../../utils/cn";
 import {
-  IconBrandGithub,
-  IconBrandGoogle,
-} from "@tabler/icons-react";
+  doSignInWithEmailAndPassword,
+  doSignInWithGoogle,
+} from "./firebase/auth";
+import { useAuth } from "./authContext";
+
+// Icons
+import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+
 export const Login = () => {
-  const handleSubmit = (e) => {
+  const { userLoggedIn } = useAuth();
+  console.log(userLoggedIn)
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+    if (!isSigningIn) {
+      setIsSigningIn(true);
+      try {
+        await doSignInWithEmailAndPassword(email, password);
+      } catch (error) {
+        setIsSigningIn(false);
+        setErrorMessage("Incorrect email or password.");
+        return;
+      }
+    }
   };
+
+  const onGoogleSignIn = (e) => {
+    e.preventDefault();
+    if (!isSigningIn) {
+      setIsSigningIn(true);
+      doSignInWithGoogle().catch((err) => {
+        setIsSigningIn(false);
+      });
+    }
+  };
+
   return (
     <div className="max-w-md w-full mx-auto p-4 font-mont lg:static absolute top-20 -z-10">
+      {userLoggedIn && <Navigate to={"/ScriptQuiz/home"} replace={true} />}  
       <h2 className="font-bold font-montalt text-center text-2xl text-neutral-200">
         Create an account
       </h2>
@@ -20,25 +58,7 @@ export const Login = () => {
         Enter your email below to create an account.
       </p>
 
-      {/* TODO: Add moving gradient maybe maybe? */}
-      {/* content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: var(--line-width);
-    background: conic-gradient(from calc(var(--angle) + var(--start-angle)), transparent 0, var(--line-color) 20%, transparent 25%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: inherit;
-
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    filter: drop-shadow(0 0 10px var(--line-color)); */}
-      <form className="my-8" onSubmit={handleSubmit}>
+      <form className="my-8" onSubmit={onSubmit}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
             <Label htmlFor="firstname">First name</Label>
@@ -51,15 +71,34 @@ export const Login = () => {
         </div>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="name@email.com" type="email" />
+          <Input
+            id="email"
+            placeholder="name@email.com"
+            type="email"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            required
+          />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-8">
-          <Label htmlFor="twitterpassword">Confirm Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input
+            id="password"
+            placeholder="••••••••"
+            type="password"
+            autoComplete="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            required
+          />
+          {errorMessage && (
+            <span className="text-red-600 font-bold">{errorMessage}</span>
+          )}
         </LabelInputContainer>
 
         <button
@@ -74,6 +113,9 @@ export const Login = () => {
 
         <div className="flex flex-col space-y-4">
           <button
+            onClick={(e) => {
+              onGoogleSignIn(e);
+            }}
             className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="submit"
           >
