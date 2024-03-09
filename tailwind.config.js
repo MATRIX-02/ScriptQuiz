@@ -5,14 +5,33 @@ const {
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}",],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        shimmer: "shimmer 2s linear infinite",
+      },
+      keyframes: {
+        shimmer: {
+          from: {
+            backgroundPosition: "0 0",
+          },
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
+      },
+    },
     fontFamily:{
       'mont':['Montserrat', 'sans-serif'],
       'montalt':['Montserrat Alternates', 'sans-serif'],
       'madurai':['Hind Madurai', 'sans-serif'],
     }
   },
-  plugins: [addVariablesForColors],
+  plugins: [
+    {
+      handler: addVariablesForColors,
+    },
+    require('tailwindcss-animated'),
+  ],
 }
 
 function addVariablesForColors({ addBase, theme }: any) {

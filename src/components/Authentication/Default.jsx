@@ -37,7 +37,7 @@ const Default = () => {
             </h3>
           </div>
           <span className="text-white font-madurai">
-            Created with ❤️ by Mayank.
+            Created with <span className="animate-pulse">❤️</span> by Mayank.
           </span>
         </motion.div>
         <div className="lg:w-2/4  w-full h-screen p-14 relative z-10 flex flex-col justify-center items-center">
@@ -48,9 +48,12 @@ const Default = () => {
             <div className="flex justify-between">
               <button
                 onClick={() => logHandler()}
-                className="block text-white p-2 font-mont text-lg rounded-lg hover:bg-zinc-800 transition-all"
+                className="block bg-slate-800 no-underline group cursor-pointer shadow-2xl shadow-zinc-900 rounded-full p-px text-base font-semibold leading-6  text-white"
               >
-                {logType ? <>Login</> : <>SignUp</>}
+                <div className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-2 px-5 ring-1 ring-white/10 ">
+                  <span>{logType ? <>SignUp</> : <>Login</>}</span>
+                </div>
+                <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
               </button>
               <button
                 onClick={() => animationHandler()}
@@ -69,14 +72,18 @@ const Default = () => {
               </button>
             </div>
           </nav>
+
           <button
             onClick={() => logHandler()}
-            className="hidden lg:block absolute text-white p-2 font-mont text-lg top-14 right-14 rounded-lg hover:bg-zinc-800 transition-all"
+            className="hidden lg:inline-block bg-slate-800 no-underline group cursor-pointer absolute top-14 right-14  shadow-2xl shadow-zinc-900 rounded-full p-px text-base font-semibold leading-6  text-white"
           >
-            {logType ? <>Login</> : <>SignUp</>}
+            <div className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-2 px-5 ring-1 ring-white/10 ">
+              <span>{logType ? <>SignUp</> : <>Login</>}</span>
+            </div>
+            <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
           </button>
 
-          {logType ? <Login /> : <Signup />}
+          {logType ? <Login /> : <Signup logHandler={logHandler} />}
 
           <button
             onClick={() => animationHandler()}

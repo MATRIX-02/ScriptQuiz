@@ -1,13 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { doSignOut } from "./Authentication/firebase/auth";
+import { useAuth } from "./Authentication/authContext";
 
 const Home = () => {
-
+  const {userLoggedIn} =  useAuth();
   const navigate = useNavigate();
 
   return (
     <div>
+      {!userLoggedIn && <Navigate to={"/ScriptQuiz"} replace={true} />}
       <nav className="w-full h-14 absolute top-0 left-0 right-0 m-auto flex justify-between items-center px-14 font-mont">
         <h1 className="font-extrabold text-[1.5rem] text-white">ScriptQuiz</h1>
         <div className=" flex justify-evenly w-1/3">
