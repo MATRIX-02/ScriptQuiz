@@ -24,7 +24,7 @@ const Default = () => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex" >
         <motion.div
           className={`hidden w-2/4 h-screen p-14 lg:flex flex-col justify-between transition-all bg-gradient-to-tr from-[#160040] from-10% via-[#4C0070] via-30% via-[#79018C] via-60% to-[#9A0680] to-90%`}
         >

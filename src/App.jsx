@@ -6,14 +6,16 @@ import Home from "./components/Home";
 
 import { AuthProvider } from "./components/Authentication/authContext";
 import { Route, Routes } from "react-router-dom";
+import Header from "./components/navbar";
 
 function App() {
   return (
     <>
       <AuthProvider>
+        
         <Routes>
           <Route path="/ScriptQuiz" element={<Default />}></Route>
-          <Route path="/ScriptQuiz/home" element={<Home />}></Route>
+          <Route path="/ScriptQuiz/home" element={<><Header/><Home /></>}></Route>
         </Routes>
       </AuthProvider>
     </>
