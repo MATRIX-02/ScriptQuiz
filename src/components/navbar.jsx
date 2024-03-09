@@ -13,7 +13,7 @@ const Header = () => {
             minSize={0.4}
             maxSize={1}
             particleDensity={1200}
-            className="w-full h-full absolute top-0 -z-10 "
+            className="w-full h-full absolute top-0 right-0 left-0 m-auto -z-10 "
             particleColor="#FFFFFF"
           />
         <div className="absolute left-0 right-0 m-auto bottom-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[1px] w-3/4 blur-sm" />
