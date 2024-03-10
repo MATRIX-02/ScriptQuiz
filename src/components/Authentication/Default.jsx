@@ -9,6 +9,7 @@ import { Signup } from "./SignUp";
 //Icons
 import { FaCirclePause } from "react-icons/fa6";
 import { IoIosPlayCircle } from "react-icons/io";
+import { BackgroundGradientAnimation } from "../ui/background-gradient-animation";
 
 const Default = () => {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -25,10 +26,10 @@ const Default = () => {
   return (
     <>
       <div className="flex" >
-        <motion.div
-          className={`hidden w-2/4 h-screen p-14 lg:flex flex-col justify-between transition-all bg-gradient-to-tr from-[#160040] from-10% via-[#4C0070] via-30% via-[#79018C] via-60% to-[#9A0680] to-90%`}
+        <BackgroundGradientAnimation
+          className=" absolute top-0 left-0 hidden w-2/4 h-screen p-14 lg:flex flex-col justify-between transition-all"
         >
-          <div className="z-10">
+          <div >
             <h1 className="text-white font-extrabold text-[4rem] font-mont">
               ScriptQuiz
             </h1>
@@ -39,8 +40,9 @@ const Default = () => {
           <span className="text-white font-madurai">
             Created with <span className="animate-pulse">❤️</span> by Mayank.
           </span>
-        </motion.div>
-        <div className="lg:w-2/4  w-full h-screen p-14 relative z-10 flex flex-col justify-center items-center">
+        </BackgroundGradientAnimation>
+        <div className="lg:w-2/4  w-full h-screen p-14 relative flex flex-col justify-center items-center z-10">
+        {showAnimation ? <BackgroundBeams /> : <></>}
           <nav className="w-full px-5 items-center fixed top-0 left-0 right-0 m-auto flex justify-between lg:hidden py-3 backdrop-blur-sm shadow-md">
             <h1 className="text-white font-extrabold text-[1.5rem] font-mont">
               ScriptQuiz
@@ -52,12 +54,12 @@ const Default = () => {
               >
                 <div className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-2 px-5 ring-1 ring-white/10 ">
                   <span>{logType ? <>SignUp</> : <>Login</>}</span>
-                </div>
                 <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
+                </div>
               </button>
               <button
                 onClick={() => animationHandler()}
-                className="text-white p-2 font-mont text-sm flex rounded-lg hover:bg-zinc-800 transition-all items-center "
+                className="text-white mx-2 p-1.5 font-mont text-sm flex rounded-full hover:bg-zinc-800 transition-all items-center "
               >
                 {showAnimation ? (
                   <>
@@ -71,6 +73,7 @@ const Default = () => {
                 )}
               </button>
             </div>
+                <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
           </nav>
 
           <button
@@ -100,8 +103,8 @@ const Default = () => {
               </>
             )}
           </button>
+        
         </div>
-        {showAnimation ? <BackgroundBeams className="" /> : <></>}
       </div>
     </>
   );

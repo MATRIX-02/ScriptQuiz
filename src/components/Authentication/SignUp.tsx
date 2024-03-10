@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { cn } from "../../../utils/cn";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // auth
 import {
@@ -10,38 +12,45 @@ import {
   doSendEmailVerification,
   doSignOut,
 } from "./firebase/auth";
-import { useAuth } from "./authContext";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+
 
 // Icons
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
 
 export const Signup = ({ logHandler }) => {
-  const navigate = useNavigate();
-
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { userLoggedIn } = useAuth();
-
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!isRegistering && password === confirmPassword) {
       setIsRegistering(true);
+      try{
       await doCreateUserWithEmailAndPassword(email, password);
       await doSendEmailVerification();
       await doSignOut();
       await logHandler();
+      } catch(error) {
+        setIsRegistering(false);
+        setErrorMessage(error.code);
+        setTimeout(() => {
+          toast.error(error.code);
+        }, 0);
+      }
     }
     if (password !== confirmPassword) {
+      setTimeout(() => {
+        toast.error("Passwords do not match")
+      }, 0);
       setErrorMessage("Passwords do not match!");
     }
   };
   return (
-    <div className="max-w-md w-full mx-auto p-4 font-mont lg:static absolute top-20 -z-10">
+    <div className="max-w-md w-full mx-auto p-4 font-mont lg:static absolute top-20 z-10">
       {/* {isRegistering && <Link to={"/ScriptQuiz/home"} replace={true} />} */}
       <h2 className="font-bold font-montalt text-center text-2xl text-neutral-200">
         Create an account
@@ -120,17 +129,20 @@ export const Signup = ({ logHandler }) => {
           />
         </LabelInputContainer>
         {errorMessage && (
-          <span className="text-red-600 font-bold">{errorMessage}</span>
+          <>
+            <ToastContainer className="mt-24 hidden lg:block" />
+            <span className="text-red-600 font-bold lg:hidden">{errorMessage}</span>
+          </>
         )}
         <button
-          className="overflow-hidden bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          className=" bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
           disabled={isRegistering}
         >
           <div className="overflow-hidden h-full w-full relative">
             {isRegistering ? (
               <span className="absolute top-2 left-0 right-0 m-auto animate-fade-up animate-once">
-                Thank you for registering...
+                Registering...
               </span>
             ) : (
               <span className="absolute top-2 left-0 right-0 m-auto animate-fade-down animate-once animate-duration-300">

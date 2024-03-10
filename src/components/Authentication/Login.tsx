@@ -1,6 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Components
 import { Label } from "../ui/label";
@@ -20,14 +22,10 @@ import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
 export const Login = () => {
   const { userLoggedIn, isEmailUser } = useAuth();
 
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  
-
-
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +35,10 @@ export const Login = () => {
         await doSignInWithEmailAndPassword(email, password);
       } catch (error) {
         setIsSigningIn(false);
-        setErrorMessage("Incorrect email or password.");
+        setErrorMessage(error.code);
+        setTimeout(() => {
+          toast.error(error.code)
+        }, 0);
         return;
       }
     }
@@ -47,11 +48,14 @@ export const Login = () => {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
-      try{
-      await doSignInWithGoogle()
+      try {
+        await doSignInWithGoogle();
       } catch (error) {
         setIsSigningIn(false);
         setErrorMessage(error.message);
+        setTimeout(() => {
+          toast.error(error.message)
+        }, 0);
       }
     }
   };
@@ -60,13 +64,16 @@ export const Login = () => {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
-      try{
-      await doSignInWithGithub();
-    } catch (error){
-      setIsSigningIn(false);
-      setErrorMessage(error.message);
-      return;
-    }
+      try {
+        await doSignInWithGithub();
+      } catch (error) {
+        setIsSigningIn(false);
+        setErrorMessage(error.code);
+        setTimeout(() => {
+          toast.error(error.code)
+        }, 0);
+        return;
+      }
     }
   };
 
@@ -76,10 +83,8 @@ export const Login = () => {
     else setErrorMessage("Please enter email before clicking forgot password");
   };
 
-  console.log("login appeared")
-
   return (
-    <div className="max-w-md w-full mx-auto p-4 font-mont lg:static absolute top-20 -z-10">
+    <div className="max-w-md w-full mx-auto p-4 font-mont lg:static absolute top-20 z-10">
       {userLoggedIn && <Navigate to={"/ScriptQuiz/home"} replace={true} />}
       <h2 className="font-bold font-montalt text-center text-2xl text-neutral-200">
         Login
@@ -123,7 +128,10 @@ export const Login = () => {
             required
           />
           {errorMessage && (
-            <span className="text-red-600 font-bold">{errorMessage}</span>
+            <>
+              <ToastContainer className="mt-24 hidden lg:block"/>
+              <span className="text-red-600 font-bold lg:hidden">{errorMessage}</span>
+            </>
           )}
         </LabelInputContainer>
 
@@ -132,11 +140,22 @@ export const Login = () => {
           type="submit"
         >
           <div className="overflow-hidden h-full w-full relative">
-          {isSigningIn ? (<span className="absolute top-2 left-0 right-0 m-auto animate-fade-up animate-once animate-duration-300">Checking...</span>):(<span className="absolute top-2 left-0 right-0 m-auto animate-fade-down animate-once animate-duration-300">Login &rarr;</span>)}
+            {isSigningIn ? (
+              <span className="absolute top-2 left-0 right-0 m-auto animate-fade-up animate-once animate-duration-300">
+                Checking...
+              </span>
+            ) : (
+              <span className="absolute top-2 left-0 right-0 m-auto animate-fade-down animate-once animate-duration-300">
+                Login &rarr;
+              </span>
+            )}
           </div>
           <BottomGradient />
         </button>
-        <button onClick={resetPassword} className="text-white mt-2 hover:underline">
+        <button
+          onClick={resetPassword}
+          className="text-white mt-2 hover:underline"
+        >
           Forgot Password?
         </button>
 
