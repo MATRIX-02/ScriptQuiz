@@ -2,13 +2,16 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 import { useAuth } from "./Authentication/authContext";
+import { WavyBackground } from "./ui/wavy-background";
 
 const Home = () => {
   const { userLoggedIn } = useAuth();
 
   return (
-    <div className="absolute top-14 left-0 right-0 m-auto w-11/12 lg:w-3/5">
-      <div className="container mx-auto p-8 text-white">
+    <div className="relative top-0 left-0 right-0 m-auto w-11/12 lg:w-3/5">
+      {!userLoggedIn && <Navigate to={"/ScriptQuiz"} replace={true} />}
+      <div className=" text-white">
+        <WavyBackground>
         <section className="mb-8">
           <h1 className="text-4xl font-bold mb-4">
             Welcome to ScriptQuiz!
@@ -20,7 +23,7 @@ const Home = () => {
             mastery, we've got everything you need to succeed!
           </p>
         </section>
-
+        </WavyBackground>
         <section className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2 p-4">
             <h2 className="text-3xl font-bold mb-4">Practice Questions</h2>
@@ -33,7 +36,7 @@ const Home = () => {
           </div>
           <div className="w-full md:w-1/2 p-4">
             <img
-              src="/images/practice-questions.jpg"
+              src=""
               alt="Practice Questions"
               className="w-full rounded-lg shadow-md"
             />
@@ -43,7 +46,7 @@ const Home = () => {
         <section className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2 p-4 order-last md:order-first">
             <img
-              src="/images/javascript.jpg"
+              src=""
               alt="JavaScript Mastery"
               className="w-full rounded-lg shadow-md"
             />
@@ -73,7 +76,7 @@ const Home = () => {
           </div>
           <div className="w-full md:w-1/2 p-4">
             <img
-              src="/images/machine-coding.jpg"
+              src=""
               alt="Machine Coding Challenges"
               className="w-full rounded-lg shadow-md"
             />
@@ -83,7 +86,7 @@ const Home = () => {
         <section className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2 p-4 order-last md:order-first">
             <img
-              src="/images/notes.jpg"
+              src=""
               alt="Comprehensive Notes"
               className="w-full rounded-lg shadow-md"
             />
