@@ -43,7 +43,7 @@ const Default = () => {
         </BackgroundGradientAnimation>
         <div className="lg:w-2/4  w-full h-screen p-14 relative flex flex-col justify-center items-center z-10">
         {showAnimation ? <BackgroundBeams /> : <></>}
-          <nav className="w-full px-5 items-center fixed top-0 left-0 right-0 m-auto flex justify-between lg:hidden py-3 backdrop-blur-sm shadow-md">
+          <nav className="w-full px-5 items-center fixed top-0 left-0 right-0 m-auto flex justify-between lg:hidden py-3 backdrop-blur-sm shadow-md z-20">
             <h1 className="text-white font-extrabold text-[1.5rem] font-mont">
               ScriptQuiz
             </h1>
