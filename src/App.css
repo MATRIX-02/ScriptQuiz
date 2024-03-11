@@ -12,3 +12,7 @@ html, body{
     scroll-behavior: smooth;
     background-color: #202020;
 }
+
+.test{
+    animation-play-state: paused;
+}
