@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import { useAuth } from "./Authentication/authContext";
 import { WavyBackground } from "./ui/wavy-background";
+import { TracingBeam } from "./ui/tracing-beam";
 
 const Home = () => {
   const { userLoggedIn } = useAuth();
@@ -10,27 +11,27 @@ const Home = () => {
   return (
     <div className="relative top-0 left-0 right-0 m-auto w-11/12 lg:w-3/5">
       {!userLoggedIn && <Navigate to={"/ScriptQuiz"} replace={true} />}
-      <div className=" text-white">
+      <div className=" text-white font-mont">
         <WavyBackground>
         <section className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">
-            Welcome to ScriptQuiz!
+          <h1 className="text-5xl font-bold mb-4 text-center">
+            Welcome to ScriptQuiz
           </h1>
-          <p className="text-lg mb-4">
+          <p className="text-lg mb-4 text-center">
             Whether you're a beginner or an experienced developer, sharpen your
-            skills and prepare for frontend interviews with our comprehensive
+            skills and prepare for frontend interviews with my comprehensive
             resources. From Data Structures and Algorithms to JavaScript
-            mastery, we've got everything you need to succeed!
+            mastery, I've got everything you need to conquer frontend interviews.
           </p>
         </section>
         </WavyBackground>
         <section className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2 p-4">
-            <h2 className="text-3xl font-bold mb-4">Practice Questions</h2>
+            <h2 className="text-3xl font-bold mb-4">DSA</h2>
             <p className="text-lg mb-4">
               Master the fundamentals of Data Structures and Algorithms (DSA)
-              with our extensive collection of practice questions. From arrays
-              to graphs, we cover it all to ensure you're well-prepared for any
+              with MY extensive collection of practice questions. From arrays
+              to graphs, I've made it sure to cover it all to ensure you're well-prepared for any
               technical interview.
             </p>
           </div>
