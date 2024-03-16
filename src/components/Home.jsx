@@ -3,36 +3,43 @@ import { Navigate } from "react-router-dom";
 
 import { useAuth } from "./Authentication/authContext";
 import { WavyBackground } from "./ui/wavy-background";
-import { TracingBeam } from "./ui/tracing-beam";
+import { TextGenerateEffect } from "./ui/text-generate-effect";
 
 const Home = () => {
   const { userLoggedIn } = useAuth();
-
+  const words = " Whether you're a beginner or an experienced developer, sharpen your skills and prepare for frontend interviews with my comprehensive resources. From Data Structures and Algorithms to JavaScript mastery, I've got everything you need to conquer frontend interviews.";
   return (
     <div className="relative top-0 left-0 right-0 m-auto w-11/12 lg:w-3/5">
       {!userLoggedIn && <Navigate to={"/ScriptQuiz"} replace={true} />}
       <div className=" text-white font-mont">
         <WavyBackground>
-        <section className="mb-8">
-          <h1 className="text-5xl font-bold mb-4 text-center">
-            Welcome to ScriptQuiz
-          </h1>
-          <p className="text-lg mb-4 text-center">
-            Whether you're a beginner or an experienced developer, sharpen your
-            skills and prepare for frontend interviews with my comprehensive
-            resources. From Data Structures and Algorithms to JavaScript
-            mastery, I've got everything you need to conquer frontend interviews.
-          </p>
-        </section>
+          <section className="mb-8 bg-[#1d1c20] backdrop-blur-sm bg-opacity-50 p-6 pt-16 rounded-lg relative">
+            <div className="h-6 bg-zinc-900 absolute top-0 left-0 right-0 m-auto rounded-t-lg flex items-center justify-start gap-1 px-3">
+              <div className="w-3.5 h-3.5 rounded-full bg-[#FF671F]"></div>
+              <div className="w-3.5 h-3.5 rounded-full bg-[#FFFFFF] flex justify-center items-center">
+                {/* <div className="w-2 h-2 rounded-full bg-[#06038D]"></div> */}
+              </div>
+              <div className="w-3.5 h-3.5 rounded-full bg-[#046A38]"></div>
+            </div>
+            
+            <h1 className="text-5xl font-bold mb-9 text-center">
+              Welcome to ScriptQuiz
+            </h1>
+          
+            <p className="text-base mb-4 text-center">
+            <TextGenerateEffect words={words} />
+              
+            </p>
+          </section>
         </WavyBackground>
         <section className="flex flex-wrap items-center">
           <div className="w-full md:w-1/2 p-4">
             <h2 className="text-3xl font-bold mb-4">DSA</h2>
             <p className="text-lg mb-4">
               Master the fundamentals of Data Structures and Algorithms (DSA)
-              with MY extensive collection of practice questions. From arrays
-              to graphs, I've made it sure to cover it all to ensure you're well-prepared for any
-              technical interview.
+              with MY extensive collection of practice questions. From arrays to
+              graphs, I've made it sure to cover it all to ensure you're
+              well-prepared for any technical interview.
             </p>
           </div>
           <div className="w-full md:w-1/2 p-4">
