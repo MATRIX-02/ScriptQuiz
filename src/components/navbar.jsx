@@ -12,6 +12,7 @@ import { doSignOut } from "./Authentication/firebase/auth";
 export const navlinks = [
   {
     title: "DSA",
+    link: "/ScriptQuiz/dsa-notes"
   },
   {
     title: "Problems",

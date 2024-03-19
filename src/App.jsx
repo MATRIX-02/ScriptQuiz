@@ -3,6 +3,7 @@ import "./App.css";
 //Components
 import Default from "./components/Authentication/Default";
 import Home from "./components/Home";
+import DSAnotes from "./DSAnotes";
 
 import { AuthProvider } from "./components/Authentication/authContext";
 import { Route, Routes } from "react-router-dom";
@@ -12,10 +13,10 @@ function App() {
   return (
     <>
       <AuthProvider>
-        
         <Routes>
-          <Route path="/ScriptQuiz" element={<Default />}></Route>
+          <Route exact path="/ScriptQuiz" element={<Default />}></Route>
           <Route path="/ScriptQuiz/home" element={<><Header/><Home /></>}></Route>
+          <Route path="/ScriptQuiz/dsa-notes" element={<><Header/><DSAnotes /></>}></Route>
         </Routes>
       </AuthProvider>
     </>

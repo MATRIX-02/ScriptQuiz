@@ -26,10 +26,10 @@ const Home = () => {
               Welcome to ScriptQuiz
             </h1>
           
-            <p className="text-base mb-4 text-center">
+            <span className="text-base mb-4 text-center">
             <TextGenerateEffect words={words} />
               
-            </p>
+            </span>
           </section>
         </WavyBackground>
         <section className="flex flex-wrap items-center">
