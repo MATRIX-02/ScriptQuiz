@@ -11,8 +11,8 @@ const fetchMarkdownFile = async (filePath) => {
 // Return a promise that resolves with the array of notes
 export const dsnotes = async () => {
   try {
-    const arraysMarkdown = await fetchMarkdownFile("../dsNotes/arrays.md");
-    const linkedListMarkdown = await fetchMarkdownFile("../dsNotes/linkedlist.md");
+    const arraysMarkdown = await fetchMarkdownFile("/ScriptQuiz/utils/dsNotes/arrays.md");
+    const linkedListMarkdown = await fetchMarkdownFile("/ScriptQuiz/utils/dsNotes/linkedlist.md");
     return [
       { title: "Arrays", key: "101", content: arraysMarkdown },
       { title: "Linked List", key: "102", content: linkedListMarkdown }
