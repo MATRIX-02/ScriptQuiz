@@ -3,7 +3,7 @@ import "./App.css";
 //Components
 import Default from "./components/Authentication/Default";
 import Home from "./components/Home";
-import DSAnotes from "./DSAnotes";
+import DSAnotes from "./components/DSAnotes";
 
 import { AuthProvider } from "./components/Authentication/authContext";
 import { Route, Routes } from "react-router-dom";
