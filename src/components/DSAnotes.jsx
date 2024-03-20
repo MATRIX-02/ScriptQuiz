@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { dsnotes } from "../../utils/custom hooks/useDsNotes";
+import { Link } from "react-router-dom";
 
 const DSAnotes = () => {
   const [notes, setNotes] = useState(null);
@@ -22,14 +23,16 @@ const DSAnotes = () => {
       <div>
         {notes &&
           notes.map((note) => (
+            <Link key={note.key} to={"/ScriptQuiz/dsa-notes/" + note.key}>
             <div
               className="w-full h-24 mt-5 border border-slate-700 rounded-xl flex justify-center items-center cursor-pointer transition-all hover:scale-105"
-              key={note.key}
+              
             >
               <span className="text-white font-mont text-xl uppercase font-semibold z-10">
                 {note.title}
               </span>
             </div>
+              </Link>
           ))}
       </div>
     </div>
